@@ -3,10 +3,10 @@ LAT_V="${GAME_VERSION//.}"
 CUR_V="$(find $DATA_DIR -name terraria-* | cut -d '-' -f 2,3)"
 
 echo "---Version Check---"
-if [ ! -f "${SERVER_DIR}/TerrariaServer.bin.x86_64" ]; then
+if [ ! -d "${SERVER_DIR}/lib" ]; then
     echo "---Terraria not found, downloading!---"
     cd ${SERVER_DIR}
-    wget -q - http://terraria.org/server/terraria-server-$LAT_V.zip --show-progress
+    wget -q - http://terraria.org/server/terraria-server-$LAT_V.zip
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/$LAT_V
@@ -16,7 +16,7 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
     echo "---Newer version found, installing!---"
     rm ${DATA_DIR}/terraria-$CUR_V
     cd ${SERVER_DIR}
-    wget -q - http://terraria.org/server/terraria-server-$LAT_V.zip --show-progress
+    wget -q - http://terraria.org/server/terraria-server-$LAT_V.zip
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/$LAT_V
