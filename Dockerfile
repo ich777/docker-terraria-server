@@ -3,8 +3,10 @@ FROM ubuntu
 MAINTAINER ich777
 
 RUN apt-get update
-RUN apt-get -y install wget screen unzip
+RUN apt-get -y install wget screen unzip mono-complete
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+ENV TZ=Europe/Rome
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
