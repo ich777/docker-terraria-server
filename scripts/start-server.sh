@@ -30,39 +30,39 @@ else
 fi
 
 
-if [ "${GAME_MOD}" == "tshock" ]; then
-    CUR_MOD_V="$(find ${DATA_DIR} -name tshock* | cut -d '_' -f 2)"
-    LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
+
+CUR_MOD_V="$(find ${DATA_DIR} -name tshock* | cut -d '_' -f 2)"
+LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
 
 echo "---Version Check of TShock Mod---"
-    if [ -z "$CUR_MOD_V" ]; then
-       echo "---TShock Mod not found!---"
-       cd ${SERVER_DIR}
-       curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest \
-       | grep "browser_download_url." \
-       | cut -d ":" -f2,3 \
-       | cut -d '"' -f2 \
-       | wget -qi -
-       unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
-       mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${DATA_DIR}/tshock_$LAT_MOD_V
-    elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
-       echo "---Newer version found, installing!---"
-       rm ${DATA_DIR}/tshock_$CUR_MOD_V
-       cd ${SERVER_DIR}
-       curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest \
-       | grep "browser_download_url." \
-       | cut -d ":" -f2,3 \
-       | cut -d '"' -f2 \
-       | wget -qi -
-       unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
-       mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${DATA_DIR}/tshock_$LAT_MOD_V
-    elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
-       echo "---TShock Mod Version up-to-date---"
-    else
-       echo "---Something went wrong, putting server in sleep mode---"
-       sleep infinity
-    fi
+if [ -z "$CUR_MOD_V" ]; then
+    echo "---TShock Mod not found!---"
+    cd ${SERVER_DIR}
+    curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest \
+    | grep "browser_download_url." \
+    | cut -d ":" -f2,3 \
+    | cut -d '"' -f2 \
+    | wget -qi -
+    unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
+    mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${DATA_DIR}/tshock_$LAT_MOD_V
+elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
+    echo "---Newer version found, installing!---"
+    rm ${DATA_DIR}/tshock_$CUR_MOD_V
+    cd ${SERVER_DIR}
+    curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest \
+    | grep "browser_download_url." \
+    | cut -d ":" -f2,3 \
+    | cut -d '"' -f2 \
+    | wget -qi -
+    unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
+    mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${DATA_DIR}/tshock_$LAT_MOD_V
+elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
+    echo "---TShock Mod Version up-to-date---"
+else
+    echo "---Something went wrong, putting server in sleep mode---"
+    sleep infinity
 fi
+
 
 echo "---Prepare Server---"
 if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
@@ -73,16 +73,12 @@ fi
 echo "---Server ready---"
 chmod -R 770 ${DATA_DIR}
 
-if [ "${GAME_MOD}" == "tshock" ]; then
-    echo "---Start Server---"
-    cd ${SERVER_DIR}
-    screen -S Terraria -m \
-        mono-sgen TerrariaServer.exe \
-        ${GAME_PARAMS}
-else
-    echo "---Start Server---"
-    cd ${SERVER_DIR}
-    screen -S Terraria -d -m ./TerrariaServer.bin.x86_64 ${GAME_PARAMS}
+
+echo "---Start Server---"
+cd ${SERVER_DIR}
+screen -S Terraria -m \
+    mono-sgen TerrariaServer.exe \
+    ${GAME_PARAMS}
 echo "--------------------------------------------------"
 echo "       If you want to get detailed logs open      "
 echo "a console and type in 'screen -r' (without quotes)"
