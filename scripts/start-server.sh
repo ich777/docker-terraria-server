@@ -82,4 +82,9 @@ if [ "${GAME_MOD}" == "tshock" ]; then
 else
     echo "---Start Server---"
     cd ${SERVER_DIR}
-    screen -S Terraria -m ./TerrariaServer.bin.x86_64 ${GAME_PARAMS}
+    screen -S Terraria -d -m ./TerrariaServer.bin.x86_64 ${GAME_PARAMS}
+echo "--------------------------------------------------"
+echo "       If you want to get detailed logs open      "
+echo "a console and type in 'screen -r' (without quotes)"
+echo "--------------------------------------------------"
+sleep infinity
