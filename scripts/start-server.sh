@@ -1,8 +1,6 @@
 #!/bin/bash
-LAT_V="${GAME_VERSION//.}
+LAT_V="${GAME_VERSION//.}"
 CUR_V="$(find $DATA_DIR -name terraria-* | cut -d '-' -f 2,3)"
-
-sleep infinity
 
 echo "---Version Check---"
 if [ ! -f "${SERVER_DIR}/TerrariaServer.bin.x86_64" ]; then
