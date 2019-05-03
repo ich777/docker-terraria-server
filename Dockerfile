@@ -5,7 +5,7 @@ MAINTAINER ich777
 RUN apt-get update
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ENV TZ=Europe/Rome
-RUN apt-get -y install wget screen unzip mono-complete
+RUN apt-get -y install wget screen unzip mono-complete curl
 
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
