@@ -65,6 +65,12 @@ echo "---Version Check of TShock Mod---"
 fi
 
 echo "---Prepare Server---"
+if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
+  echo "---No serverconfig.txt found, downloading...---"
+  cd ${SERVER_DIR}
+  wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
+fi
+
 chmod -R 770 ${DATA_DIR}
 echo "---Server ready---"
 
