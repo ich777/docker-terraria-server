@@ -75,8 +75,12 @@ chmod -R 770 ${DATA_DIR}
 
 if [ "${GAME_MOD}" == "tshock" ]; then
     echo "---Start Server---"
-    ${SERVER_DIR}/mono-sgen TerrariaServer.exe ${GAME_PARAMS}
+    cd ${SERVER_DIR}
+    screen -S Terraria -m \
+        mono-sgen TerrariaServer.exe \
+        ${GAME_PARAMS}
 else
-    ${SERVER_DIR}/TerrariaServer.bin.x86_64 ${GAME_PARAMS}
+    cd ${SERVER_DIR}
+    screen -S Terraria -m ./TerrariaServer.bin.x86_64 ${GAME_PARAMS}
     
 sleep infinity
