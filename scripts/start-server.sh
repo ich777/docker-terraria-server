@@ -31,7 +31,7 @@ fi
 
 
 
-CUR_MOD_V="$(find ${DATA_DIR} -name tshock* | cut -d '_' -f 2)"
+CUR_MOD_V="$(find ${DATA_DIR} -name tshock* | cut -d '_' -f2)"
 LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
 
 echo "---Version Check of TShock Mod---"
