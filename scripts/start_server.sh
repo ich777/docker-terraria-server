@@ -70,13 +70,13 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   cd ${SERVER_DIR}
   wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
 fi
-
-chmod -R 770 ${DATA_DIR}
 echo "---Server ready---"
-
-sleep infinity
+chmod -R 770 ${DATA_DIR}
 
 if [ "${GAME_MOD}" == "tshock" ]; then
-
-echo "---Start Server---"
-screen -S Terraria -d -m ${SERVER_DIR}/TerrariaServer.bin.x86_64 -config server.cfg
+    echo "---Start Server---"
+    ${SERVER_DIR}/mono-sgen TerrariaServer.exe ${GAME_PARAMS}
+else
+    ${SERVER_DIR}/TerrariaServer.bin.x86_64 ${GAME_PARAMS}
+    
+sleep infinity
