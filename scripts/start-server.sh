@@ -43,7 +43,7 @@ echo "---Version Check of TShock Mod---"
        | cut -d ":" -f2,3 \
        | cut -d '"' -f2 \
        | wget -qi -
-       unzip -q /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
+       unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
        mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${DATA_DIR}/tshock_$LAT_MOD_V
     elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
        echo "---Newer version found, installing!---"
@@ -54,7 +54,7 @@ echo "---Version Check of TShock Mod---"
        | cut -d ":" -f2,3 \
        | cut -d '"' -f2 \
        | wget -qi -
-       unzip -q /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
+       unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
        mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${DATA_DIR}/tshock_$LAT_MOD_V
     elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
        echo "---TShock Mod Version up-to-date---"
