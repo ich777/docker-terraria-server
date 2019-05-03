@@ -36,7 +36,7 @@ LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest
 
 echo "---Version Check of TShock Mod---"
 if [ -z "$CUR_MOD_V" ]; then
-    echo "---TShock Mod not found!---"
+    echo "---TShock Mod not found! Downloading...---"
     cd ${SERVER_DIR}
     curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest \
     | grep "browser_download_url." \
