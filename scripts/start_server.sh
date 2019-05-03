@@ -80,6 +80,7 @@ if [ "${GAME_MOD}" == "tshock" ]; then
         mono-sgen TerrariaServer.exe \
         ${GAME_PARAMS}
 else
+    echo "---Start Server---"
     cd ${SERVER_DIR}
     screen -S Terraria -m ./TerrariaServer.bin.x86_64 ${GAME_PARAMS}
     
