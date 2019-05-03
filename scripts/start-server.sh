@@ -76,7 +76,7 @@ chmod -R 770 ${DATA_DIR}
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Terraria -m \
+screen -S Terraria -d -m \
     mono-sgen TerrariaServer.exe \
     ${GAME_PARAMS}
 echo "--------------------------------------------------"
