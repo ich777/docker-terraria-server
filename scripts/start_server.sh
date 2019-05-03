@@ -83,5 +83,3 @@ else
     echo "---Start Server---"
     cd ${SERVER_DIR}
     screen -S Terraria -m ./TerrariaServer.bin.x86_64 ${GAME_PARAMS}
-    
-sleep infinity
