@@ -37,12 +37,11 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
 fi
 echo "---Server ready---"
 chmod -R 770 ${DATA_DIR}
+echo "---Checking for old logs---"
+find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Terraria -d -m ${SERVER_DIR}/TerrariaServer.bin.x86_64 ${GAME_PARAMS}
-echo "--------------------------------------------------"
-echo "       If you want to get detailed logs open      "
-echo "a console and type in 'screen -r' (without quotes)"
-echo "--------------------------------------------------"
-sleep infinity
+screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/TerrariaServer.bin.x86_64 ${GAME_PARAMS}
+sleep 2
+tail -f ${SERVER_DIR}/masterLog.0
