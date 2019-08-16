@@ -1,6 +1,7 @@
 # Terraria Dedicated Server in Docker optimized for Unraid
 
 This Docker will download and install Terraria and run it.
+
 ***SERVER PASSWORD: Docker***
 
 Update Notice: Change the game version to whatever version do you want and restart the docker.
