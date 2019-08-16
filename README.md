@@ -19,7 +19,7 @@ Update Notice: Change the game version to whatever version do you want and resta
 # Run example
 
 docker run --name Terraria -d \
-    -p 36963:36963/udp \
+    -p 7777:7777/udp \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
     --env 'GAME_VERSION=1.3.5.3' \
     --env 'UID=99' \
