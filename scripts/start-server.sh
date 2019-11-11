@@ -38,7 +38,7 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
 fi
 echo "---Server ready---"
-chmod -R 770 ${DATA_DIR}
+chmod -R 777 ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
