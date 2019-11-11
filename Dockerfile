@@ -12,6 +12,7 @@ ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
 ENV GAME_MOD="template"
 ENV GAME_PARAMS="template"
+ENV UMASK=000
 ENV UID=99
 ENV GID=100
 
