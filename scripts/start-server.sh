@@ -77,6 +77,8 @@ chmod -R 777 ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
+echo "---sleep---"
+sleep infinity
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
