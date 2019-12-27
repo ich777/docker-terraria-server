@@ -19,7 +19,7 @@ ENV UID=99
 ENV GID=100
 
 RUN mkdir $DATA_DIR && \
-	mkdir $SERVER_DIR
+	mkdir $SERVER_DIR && \
 	useradd -d $DATA_DIR -s /bin/bash --uid $UID --gid $GID terraria && \
 	chown -R terraria $DATA_DIR && \
 	ulimit -n 2048
