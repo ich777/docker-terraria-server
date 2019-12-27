@@ -80,6 +80,6 @@ find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer -config serverconfig.txt ${GAME_PARAMS}
+screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer ${GAME_PARAMS}
 sleep 2
 tail -f ${SERVER_DIR}/masterLog.0
