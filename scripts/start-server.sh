@@ -32,7 +32,6 @@ else
 fi
 
 
-
 CUR_MOD_V="$(find ${DATA_DIR} -name tshock_* | cut -d '_' -f2)"
 LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
 
@@ -65,8 +64,10 @@ else
     sleep infinity
 fi
 
-
 echo "---Prepare Server---"
+if [ -f ${SERVER_DIR}/System.dll ]; then
+	rm ${SERVER_DIR}/System.dll
+fi
 if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   echo "---No serverconfig.txt found, downloading...---"
   cd ${SERVER_DIR}
@@ -76,9 +77,6 @@ echo "---Server ready---"
 chmod -R 777 ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
-
-echo "---sleep---"
-sleep infinity
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
