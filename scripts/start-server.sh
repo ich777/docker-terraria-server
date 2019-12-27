@@ -31,7 +31,8 @@ else
   sleep infinity
 fi
 
-
+echo "---sleep---"
+sleep infinity
 
 CUR_MOD_V="$(find ${DATA_DIR} -name tshock_* | cut -d '_' -f2)"
 LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
