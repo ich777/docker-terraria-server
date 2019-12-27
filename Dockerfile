@@ -11,7 +11,7 @@ RUN export TZ=Europe/Rome && \
 	echo "deb https://download.mono-project.com/repo/debian stable-buster main" | \
 	tee /etc/apt/sources.list.d/mono-official-stable.list && \
 	apt-get update && \
-	apt-get -y install --no-install-recommends mono-complete
+	apt-get -y install --no-install-recommends mono-complete && \
 	rm -rf /var/lib/apt/lists/*
 
 ENV DATA_DIR="/serverdata"
