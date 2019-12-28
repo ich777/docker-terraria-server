@@ -6,7 +6,6 @@ RUN apt-get update && \
 	apt-get -y install --no-install-recommends screen unzip curl && \
 	rm -rf /var/lib/apt/lists/*
 
-
 ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
