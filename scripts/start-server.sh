@@ -68,6 +68,9 @@ else
 fi
 
 echo "---Prepare Server---"
+if [ ! -d ${SERVER_DIR}/TML ]; then
+	mkdir ${SERVER_DIR}/TML
+fi
 if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   echo "---No serverconfig.txt found, downloading...---"
   cd ${SERVER_DIR}
@@ -80,6 +83,6 @@ find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer ${GAME_PARAMS}
+screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer -tmlsavedirectory ${SERVER_DIR}/TML ${GAME_PARAMS}
 sleep 2
 tail -f ${SERVER_DIR}/masterLog.0
