@@ -2,7 +2,7 @@ FROM ich777/mono-baseimage
 
 LABEL maintainer="admin@minenet.at"
 
-RUN	apt-get update && \
+RUN apt-get update && \
 	apt-get -y install --no-install-recommends screen unzip curl && \
 	rm -rf /var/lib/apt/lists/*
 
