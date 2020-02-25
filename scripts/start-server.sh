@@ -1,8 +1,6 @@
 #!/bin/bash
 LAT_V="${GAME_VERSION//.}"
 CUR_V="$(find $DATA_DIR -name terraria-* | cut -d '-' -f 2,3)"
-echo "---Setting umask to ${UMASK}---"
-umask ${UMASK}
 
 echo "---Version Check---"
 if [ ! -d "${SERVER_DIR}/lib" ]; then
@@ -74,7 +72,7 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
 fi
 echo "---Server ready---"
-chmod -R 777 ${DATA_DIR}
+chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
 
