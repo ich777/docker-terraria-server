@@ -6,6 +6,8 @@ This Docker will download and install Terraria and the TShock MOD and run it.
 
 Update Notice: Change the game version to whatever version do you want and restart the docker.
 
+CONSOLE: To connect to the console open up the terminal on the host machine and type in: 'docker exec -u terraria -ti [Name of your Container] screen -xS Terraria' (without quotes) to exit the screen session press CTRL+A and then CTRL+D or simply close the terminal window in the first place.
+
 ## Env params
 
 | Name | Value | Example |
