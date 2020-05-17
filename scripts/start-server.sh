@@ -7,6 +7,16 @@ else
 	if [ "$LAT_V" == "1402" ]; then
 		DL_LINK="https://terraria.org/system/dedicated_servers/archives/000/000/036/original/"
 		DL_TOP="?1589675482"
+	elif [ "$LAT_V" -ge "1403" ]; then
+		echo "------------------------------------------------------------------------------"
+		echo "----No downloadlink availabe vor v${GAME_VERSION}, please place the server----"
+		echo "----executable in the main directory to install it manually, don't forget-----"
+		echo "----to set it to the right version in your Docker configuration, otherwise----"
+		echo "-----------------------it won't find the zip file!----------------------------"
+		echo "------------------------------------------------------------------------------"
+		echo "--------------------You can get the file links from here:---------------------"
+		echo "-----------https://terraria.gamepedia.com/Server#How_to_.28Linux.29-----------"
+		echo "------------------------------------------------------------------------------"
 	fi
 fi
 
@@ -17,7 +27,7 @@ if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
     cd ${SERVER_DIR}
 	echo "---Found Terraria v${GAME_VERSION} locally, installing---"
 	unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    cp -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/$LAT_V
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
     touch ${SERVER_DIR}/terraria-$LAT_V
@@ -37,7 +47,7 @@ else
 			echo "------------------------------------------------------------------------------"
 		fi
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    cp -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 	    touch ${SERVER_DIR}/terraria-$LAT_V
@@ -56,7 +66,7 @@ else
 			echo "------------------------------------------------------------------------------"
 		fi
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    cp -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 	    touch ${SERVER_DIR}/terraria-$LAT_V
