@@ -1,6 +1,6 @@
 #!/bin/bash
 LAT_V="${GAME_VERSION//.}"
-CUR_V="$(find $DATA_DIR -name terraria-* | cut -d '-' -f 2,3)"
+CUR_V="$(find ${SERVER_DIR} -name terraria-* | cut -d '-' -f 2,3)"
 if [ "$LAT_V" -lt "1402" ]; then
 	DL_LINK="http://terraria.org/server/"
 else
