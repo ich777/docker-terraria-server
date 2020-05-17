@@ -124,6 +124,7 @@ echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
+screen -wipe 2&>/dev/null
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
@@ -131,4 +132,5 @@ screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m \
     mono-sgen TerrariaServer.exe \
     ${GAME_PARAMS}
 sleep 2
+screen -S watchdog -d -m /opt/scripts/start-watchdog.sh
 tail -f ${SERVER_DIR}/masterLog.0
