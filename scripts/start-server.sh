@@ -22,7 +22,7 @@ fi
 
 if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
 	if [ ${SERVER_DIR}/terraria-$CUR_V ]; then
-    	rm ${SERVER_DIR}/terraria-$CUR_V
+		rm ${SERVER_DIR}/terraria-$CUR_V
 	fi
     cd ${SERVER_DIR}
 	echo "---Found Terraria v${GAME_VERSION} locally, installing---"
