@@ -91,8 +91,8 @@ if [ -z "$CUR_MOD_V" ]; then
     | cut -d ":" -f2,3 \
     | cut -d '"' -f2 \
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
-    tar --overwrite -xvf ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.tar.gz
-    rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.tar.gz
+    unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
+    rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     touch ${DATA_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
@@ -104,8 +104,8 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | cut -d ":" -f2,3 \
     | cut -d '"' -f2 \
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
-    tar --overwrite -xvf ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.tar.gz
-    rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.tar.gz
+    unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
+    rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     touch ${DATA_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---tModloader Version up-to-date---"
@@ -133,5 +133,4 @@ echo "---Start Server---"
 cd ${SERVER_DIR}
 screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer -tmlsavedirectory ${SERVER_DIR}/TML ${GAME_PARAMS}
 sleep 2
-screen -S watchdog -d -m /opt/scripts/start-watchdog.sh
 tail -f ${SERVER_DIR}/masterLog.0
