@@ -1,6 +1,6 @@
 #!/bin/bash
 LAT_V="${GAME_VERSION//.}"
-CUR_V="$(find $DATA_DIR -name terraria-* | cut -d '-' -f 2,3)"
+CUR_V="$(find $SERVER_DIR -name terraria-* | cut -d '-' -f 2,3)"
 if [ "$LAT_V" -lt "1402" ]; then
 	DL_LINK="http://terraria.org/server/"
 else
@@ -78,7 +78,7 @@ else
 	fi
 fi
 
-CUR_MOD_V="$(find ${DATA_DIR} -name tmodloader_* | cut -d '_' -f2)"
+CUR_MOD_V="$(find ${SERVER_DIR} -name tmodloader_* | cut -d '_' -f2)"
 LAT_MOD_V="$(curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
 
 echo "---Version Check of tModloader---"
@@ -93,10 +93,10 @@ if [ -z "$CUR_MOD_V" ]; then
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
     unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
-    touch ${DATA_DIR}/tmodloader_$LAT_MOD_V
+    touch ${SERVER_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
-    rm ${DATA_DIR}/tmodloader_$CUR_MOD_V
+    rm ${SERVER_DIR}/tmodloader_$CUR_MOD_V
     cd ${SERVER_DIR}
     curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest \
     | grep "browser_download_url." \
@@ -106,7 +106,7 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
     unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
-    touch ${DATA_DIR}/tmodloader_$LAT_MOD_V
+    touch ${SERVER_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---tModloader Version up-to-date---"
 else
