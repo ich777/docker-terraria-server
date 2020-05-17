@@ -21,7 +21,7 @@ else
 fi
 
 if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
-	if [ ${SERVER_DIR}/terraria-$CUR_V ]; then
+	if [ -f ${SERVER_DIR}/terraria-$CUR_V ]; then
 		rm ${SERVER_DIR}/terraria-$CUR_V
 	fi
     cd ${SERVER_DIR}
