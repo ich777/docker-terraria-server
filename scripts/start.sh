@@ -17,4 +17,20 @@ fi
 
 echo "---Starting...---"
 chown -R ${UID}:${GID} /opt/scripts
-su ${USER} -c "/opt/scripts/start-server.sh"
+chown -R ${UID}:${GID} ${DATA_DIR}
+
+term_handler() {
+	screenpid="$(su $USER -c "screen -list | grep "Detached" | grep "Terraria" | cut -d '.' -f1")"
+	su $USER -c "screen -S Terraria -X stuff 'exit^M'" >/dev/null
+	tail --pid="${screenpid//[[:blank:]]/}" -f 2>/dev/null
+	exit 143;
+}
+
+trap 'kill ${!}; term_handler' SIGTERM
+su ${USER} -c "/opt/scripts/start-server.sh" &
+killpid="$!"
+while true
+do
+	wait $killpid
+	exit 0;
+done
