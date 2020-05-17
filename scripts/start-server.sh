@@ -11,16 +11,16 @@ else
 fi
 
 if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
-	if [ ${DATA_DIR}/terraria-$CUR_V ]; then
-    	rm ${DATA_DIR}/terraria-$CUR_V
+	if [ ${SERVER_DIR}/terraria-$CUR_V ]; then
+    	rm ${SERVER_DIR}/terraria-$CUR_V
 	fi
     cd ${SERVER_DIR}
 	echo "---Found Terraria v${GAME_VERSION} locally, installing---"
 	unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+    mv -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/$LAT_V
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    touch ${DATA_DIR}/terraria-$LAT_V
+    touch ${SERVER_DIR}/terraria-$LAT_V
 else
 	echo "---Version Check---"
 	if [ ! -d "${SERVER_DIR}/lib" ]; then
@@ -37,13 +37,13 @@ else
 			echo "------------------------------------------------------------------------------"
 		fi
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    mv -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    touch ${DATA_DIR}/terraria-$LAT_V
+	    touch ${SERVER_DIR}/terraria-$LAT_V
 	elif [ "$LAT_V" != "$CUR_V" ]; then
 	    echo "---Newer version found, installing!---"
-	    rm ${DATA_DIR}/terraria-$CUR_V
+	    rm ${SERVER_DIR}/terraria-$CUR_V
 	    cd ${SERVER_DIR}
 	    if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
 			echo "---Successfully downloaded Terraria v${GAME_VERSION}---"
@@ -56,10 +56,10 @@ else
 			echo "------------------------------------------------------------------------------"
 		fi
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    mv -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    touch ${DATA_DIR}/terraria-$LAT_V
+	    touch ${SERVER_DIR}/terraria-$LAT_V
 	elif [ "$LAT_V" == "$CUR_V" ]; then
 	    echo "---Terraria Version up-to-date---"
 	else
