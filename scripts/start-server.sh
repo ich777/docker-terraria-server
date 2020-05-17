@@ -77,6 +77,7 @@ echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
 find ${SERVER_DIR} -name "masterLog.*" -exec rm -f {} \;
+screen -wipe 2&>/dev/null
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
