@@ -1,32 +1,70 @@
 #!/bin/bash
 LAT_V="${GAME_VERSION//.}"
 CUR_V="$(find $DATA_DIR -name terraria-* | cut -d '-' -f 2,3)"
-
-echo "---Version Check---"
-if [ ! -d "${SERVER_DIR}/lib" ]; then
-    echo "---Terraria not found, downloading!---"
-    cd ${SERVER_DIR}
-    wget -q - http://terraria.org/server/terraria-server-$LAT_V.zip
-    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/$LAT_V
-    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    touch ${DATA_DIR}/terraria-$LAT_V
-elif [ "$LAT_V" != "$CUR_V" ]; then
-    echo "---Newer version found, installing!---"
-    rm ${DATA_DIR}/terraria-$CUR_V
-    cd ${SERVER_DIR}
-    wget -q - http://terraria.org/server/terraria-server-$LAT_V.zip
-    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/$LAT_V
-    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    touch ${DATA_DIR}/terraria-$LAT_V
-elif [ "$LAT_V" == "$CUR_V" ]; then
-    echo "---Terraria Version up-to-date---"
+if [ "$LAT_V" -lt "1402" ]; then
+	DL_LINK="http://terraria.org/server/"
 else
-  echo "---Something went wrong, putting server in sleep mode---"
-  sleep infinity
+	if [ "$LAT_V" == "1402" ]; then
+		DL_LINK="https://terraria.org/system/dedicated_servers/archives/000/000/036/original/"
+		DL_TOP="?1589675482"
+fi
+
+if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
+	if [ ${DATA_DIR}/terraria-$CUR_V ]; then
+    	rm ${DATA_DIR}/terraria-$CUR_V
+	fi
+    cd ${SERVER_DIR}
+	echo "---Found Terraria v${GAME_VERSION} locally, installing---"
+	unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+    rm -R ${SERVER_DIR}/$LAT_V
+    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    touch ${DATA_DIR}/terraria-$LAT_V
+else
+	echo "---Version Check---"
+	if [ ! -d "${SERVER_DIR}/lib" ]; then
+    	echo "---Terraria not found, downloading!---"
+    	cd ${SERVER_DIR}
+    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
+			echo "---Successfully downloaded Terraria v${GAME_VERSION}---"
+		else
+			echo "------------------------------------------------------------------------------"
+			echo "---Can't download Terraria v${GAME_VERSION}, putting server into sleep mode---"
+			echo "------You can also place the Terraria Server zip in the main directory to-----"
+			echo "---install it manually, don't forget to set it to the right version in your---"
+			echo "----------Docker configuration, otherwise it won't find the zip file!---------"
+			echo "------------------------------------------------------------------------------"
+		fi
+	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+	    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    rm -R ${SERVER_DIR}/$LAT_V
+	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
+	    touch ${DATA_DIR}/terraria-$LAT_V
+	elif [ "$LAT_V" != "$CUR_V" ]; then
+	    echo "---Newer version found, installing!---"
+	    rm ${DATA_DIR}/terraria-$CUR_V
+	    cd ${SERVER_DIR}
+	    if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
+			echo "---Successfully downloaded Terraria v${GAME_VERSION}---"
+		else
+			echo "------------------------------------------------------------------------------"
+			echo "---Can't download Terraria v${GAME_VERSION}, putting server into sleep mode---"
+			echo "------You can also place the Terraria Server zip in the main directory to-----"
+			echo "---install it manually, don't forget to set it to the right version in your---"
+			echo "----------Docker configuration, otherwise it won't find the zip file!---------"
+			echo "------------------------------------------------------------------------------"
+		fi
+	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+	    mv ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    rm -R ${SERVER_DIR}/$LAT_V
+	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
+	    touch ${DATA_DIR}/terraria-$LAT_V
+	elif [ "$LAT_V" == "$CUR_V" ]; then
+	    echo "---Terraria Version up-to-date---"
+	else
+  	echo "---Something went wrong, putting server in sleep mode---"
+  	sleep infinity
+	fi
 fi
 
 echo "---Prepare Server---"
