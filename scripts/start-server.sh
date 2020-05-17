@@ -17,7 +17,7 @@ if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
     cd ${SERVER_DIR}
 	echo "---Found Terraria v${GAME_VERSION} locally, installing---"
 	unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    mv -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+    cp -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/$LAT_V
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
     touch ${SERVER_DIR}/terraria-$LAT_V
@@ -37,7 +37,7 @@ else
 			echo "------------------------------------------------------------------------------"
 		fi
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    mv -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    cp -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 	    touch ${SERVER_DIR}/terraria-$LAT_V
@@ -56,7 +56,7 @@ else
 			echo "------------------------------------------------------------------------------"
 		fi
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    mv -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
+	    cp -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 	    touch ${SERVER_DIR}/terraria-$LAT_V
