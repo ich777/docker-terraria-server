@@ -7,6 +7,7 @@ else
 	if [ "$LAT_V" == "1402" ]; then
 		DL_LINK="https://terraria.org/system/dedicated_servers/archives/000/000/036/original/"
 		DL_TOP="?1589675482"
+	fi
 fi
 
 if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
