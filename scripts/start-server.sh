@@ -4,20 +4,15 @@ CUR_V="$(find ${SERVER_DIR} -name terraria-* | cut -d '-' -f 2,3)"
 if [ "$LAT_V" -lt "1402" ]; then
 	DL_LINK="http://terraria.org/server/"
 else
-	if [ "$LAT_V" == "1402" ]; then
-		DL_LINK="https://terraria.org/system/dedicated_servers/archives/000/000/036/original/"
-		DL_TOP="?1589675482"
-	elif [ "$LAT_V" -ge "1403" ]; then
-		echo "------------------------------------------------------------------------------"
-		echo "----No downloadlink availabe vor v${GAME_VERSION}, please place the server----"
-		echo "----executable in the main directory to install it manually, don't forget-----"
-		echo "----to set it to the right version in your Docker configuration, otherwise----"
-		echo "-----------------------it won't find the zip file!----------------------------"
-		echo "------------------------------------------------------------------------------"
-		echo "--------------------You can get the file links from here:---------------------"
-		echo "-----------https://terraria.gamepedia.com/Server#How_to_.28Linux.29-----------"
-		echo "------------------------------------------------------------------------------"
-	fi
+	DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
+	DL_TOP=?${DL_LINK##*\?}
+    LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
+    DL_LINK=${DL_LINK%terraria*}
+	echo "------------------------------------------------------------------------------------"
+	echo "---------------------------------W A R N I N G--------------------------------------"
+	echo "---The variable Prefered Version doesn't work anymore for Version 1.4.0.2 and up----"
+	echo "---The conatainer will always pull the latest version if set to 1.4.0.2 or higher---"
+	echo "------------------------------------------------------------------------------------"
 fi
 
 if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
