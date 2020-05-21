@@ -1,13 +1,14 @@
 #!/bin/bash
 LAT_V="${GAME_VERSION//.}"
-CUR_V="$(find ${SERVER_DIR} -name terraria-* | cut -d '-' -f 2,3)"
+CUR_V="$(grep "Version" changelog.txt | head -1 | cut -d ' ' -f 2)"
+CUR_V="${CUR_V//./}"
 if [ "$LAT_V" -lt "1402" ]; then
 	DL_LINK="http://terraria.org/server/"
 else
 	DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
 	DL_TOP=?${DL_LINK##*\?}
-    LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
-    DL_LINK=${DL_LINK%terraria*}
+	LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
+	DL_LINK=${DL_LINK%terraria*}
 	echo "------------------------------------------------------------------------------------"
 	echo "---------------------------------W A R N I N G--------------------------------------"
 	echo "---The variable Prefered Version doesn't work anymore for Version 1.4.0.2 and up----"
