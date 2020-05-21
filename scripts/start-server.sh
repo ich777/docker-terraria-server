@@ -1,6 +1,6 @@
 #!/bin/bash
 LAT_V="${GAME_VERSION//.}"
-CUR_V="$(grep "Version" changelog.txt | head -1 | cut -d ' ' -f 2)"
+CUR_V="$(grep "Version" /serverdata/serverfiles/changelog.txt | head -1 | cut -d ' ' -f 2)"
 CUR_V="${CUR_V//./}"
 if [ "$LAT_V" -lt "1402" ]; then
 	DL_LINK="http://terraria.org/server/"
