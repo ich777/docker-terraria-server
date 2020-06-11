@@ -1,5 +1,5 @@
 #!/bin/bash
-CUR_V="$(grep "Version" /serverdata/serverfiles/changelog.txt | head -1 | cut -d ' ' -f 2)"
+CUR_V="$(grep "Version" /serverdata/serverfiles/changelog.txt 2>/dev/null | head -1 | cut -d ' ' -f 2)"
 CUR_V="${CUR_V//./}"
 DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
 DL_TOP=?${DL_LINK##*\?}
@@ -11,7 +11,7 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
    	echo "---Terraria not found, downloading!---"
    	cd ${SERVER_DIR}
    	if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
-		echo "---Successfully downloaded Terraria v${GAME_VERSION}---"
+		echo "---Successfully downloaded Terraria---"
 	else
 		echo "------------------------------------------------------------------------------"
 		echo "------------Can't download Terraria, putting server into sleep mode-----------"
@@ -25,7 +25,7 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
     rm ${SERVER_DIR}/terraria-$CUR_V
     cd ${SERVER_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
-		echo "---Successfully downloaded Terraria v${GAME_VERSION}---"
+		echo "---Successfully downloaded Terraria---"
 	else
 		echo "------------------------------------------------------------------------------"
 		echo "------------Can't download Terraria, putting server into sleep mode-----------"
