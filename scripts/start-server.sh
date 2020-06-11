@@ -1,20 +1,10 @@
 #!/bin/bash
-LAT_V="${GAME_VERSION//.}"
 CUR_V="$(grep "Version" /serverdata/serverfiles/changelog.txt | head -1 | cut -d ' ' -f 2)"
 CUR_V="${CUR_V//./}"
-if [ "$LAT_V" -lt "1402" ]; then
-	DL_LINK="http://terraria.org/server/"
-else
-	DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
-	DL_TOP=?${DL_LINK##*\?}
-	LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
-	DL_LINK=${DL_LINK%terraria*}
-	echo "------------------------------------------------------------------------------------"
-	echo "---------------------------------W A R N I N G--------------------------------------"
-	echo "---The variable Prefered Version doesn't work anymore for Version 1.4.0.2 and up----"
-	echo "---The conatainer will always pull the latest version if set to 1.4.0.2 or higher---"
-	echo "------------------------------------------------------------------------------------"
-fi
+DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
+DL_TOP=?${DL_LINK##*\?}
+LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
+DL_LINK=${DL_LINK%terraria*}
 
 if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
 	if [ -f ${SERVER_DIR}/terraria-$CUR_V ]; then
@@ -26,7 +16,6 @@ if [ -f ${SERVER_DIR}/terraria-server-$LAT_V.zip ]; then
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/$LAT_V
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    touch ${SERVER_DIR}/terraria-$LAT_V
 else
 	echo "---Version Check---"
 	if [ ! -d "${SERVER_DIR}/lib" ]; then
@@ -45,8 +34,6 @@ else
 	    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
 	    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
-	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    touch ${SERVER_DIR}/terraria-$LAT_V
 	elif [ "$LAT_V" != "$CUR_V" ]; then
 	    echo "---Newer version found, installing!---"
 	    rm ${SERVER_DIR}/terraria-$CUR_V
@@ -65,7 +52,6 @@ else
 	    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
 	    rm -R ${SERVER_DIR}/$LAT_V
 	    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
-	    touch ${SERVER_DIR}/terraria-$LAT_V
 	elif [ "$LAT_V" == "$CUR_V" ]; then
 	    echo "---Terraria Version up-to-date---"
 	else
