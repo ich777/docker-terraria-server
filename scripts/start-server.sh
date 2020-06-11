@@ -15,9 +15,6 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 	else
 		echo "------------------------------------------------------------------------------"
 		echo "------------Can't download Terraria, putting server into sleep mode-----------"
-		echo "------You can also place the Terraria Server zip in the main directory to-----"
-		echo "---install it manually, don't forget to set it to the right version in your---"
-		echo "----------Docker configuration, otherwise it won't find the zip file!---------"
 		echo "------------------------------------------------------------------------------"
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
@@ -32,9 +29,6 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
 	else
 		echo "------------------------------------------------------------------------------"
 		echo "------------Can't download Terraria, putting server into sleep mode-----------"
-		echo "------You can also place the Terraria Server zip in the main directory to-----"
-		echo "---install it manually, don't forget to set it to the right version in your---"
-		echo "----------Docker configuration, otherwise it won't find the zip file!---------"
 		echo "------------------------------------------------------------------------------"
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
