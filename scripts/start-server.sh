@@ -32,7 +32,6 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/$LAT_V
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" == "$CUR_V" ]; then
     echo "---Terraria Version up-to-date---"
