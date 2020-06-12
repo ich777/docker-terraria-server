@@ -14,7 +14,6 @@ if [ -z "$CUR_MOD_V" ]; then
     | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
     unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
     mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
-	touch ${SERVER_DIR}/tshock_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
     rm ${SERVER_DIR}/tshock_$CUR_MOD_V
@@ -27,7 +26,6 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
     unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
     mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
-	touch ${SERVER_DIR}/tshock_$LAT_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---TShock Mod Version up-to-date---"
 else
