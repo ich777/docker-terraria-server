@@ -19,10 +19,9 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/$LAT_V
+    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" != "$CUR_V" ]; then
     echo "---Newer version found, installing!---"
-    rm ${SERVER_DIR}/terraria-$CUR_V
     cd ${SERVER_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
 		echo "---Successfully downloaded Terraria---"
