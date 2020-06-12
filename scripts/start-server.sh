@@ -87,14 +87,6 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   cd ${SERVER_DIR}
   wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
 fi
-if [ ! -d ${SERVER_DIR}/Worlds ]; then
-	echo "---No World found, downloading---"
-	mkdir ${SERVER_DIR}/Worlds
-	cd ${SERVER_DIR}/Worlds
-	wget -qi ${SERVER_DIR}/Worlds/world.zip "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/world.zip"
-	unzip ${SERVER_DIR}/Worlds/world.zip
-	rm ${SERVER_DIR}/Worlds/world.zip
-fi
 echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
