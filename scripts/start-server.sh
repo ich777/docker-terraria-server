@@ -10,8 +10,8 @@ if [ -z "$CUR_MOD_V" ]; then
     | grep "browser_download_url." \
     | cut -d ":" -f2,3 \
     | cut -d '"' -f2 \
-	| head -1 \
-    | wget -qi -
+    | head -1 \
+    | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
     unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
     mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
 	touch ${SERVER_DIR}/tshock_$LAT_MOD_V
@@ -23,8 +23,8 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | grep "browser_download_url." \
     | cut -d ":" -f2,3 \
     | cut -d '"' -f2 \
-	| head -1 \
-    | wget -qi -
+    | head -1 \
+    | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
     unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
     mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
 	touch ${SERVER_DIR}/tshock_$LAT_MOD_V
