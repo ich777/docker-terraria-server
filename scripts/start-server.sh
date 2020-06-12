@@ -19,10 +19,9 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/$LAT_V
+    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" != "$CUR_V" ]; then
     echo "---Newer version found, installing!---"
-    rm ${SERVER_DIR}/terraria-$CUR_V
     cd ${SERVER_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
 		echo "---Successfully downloaded Terraria---"
@@ -33,7 +32,6 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/$LAT_V
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" == "$CUR_V" ]; then
     echo "---Terraria Version up-to-date---"
@@ -54,6 +52,7 @@ if [ -z "$CUR_MOD_V" ]; then
     | grep "tModLoader.Linux.*" \
     | cut -d ":" -f2,3 \
     | cut -d '"' -f2 \
+    | grep zip \
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
     unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
@@ -67,6 +66,7 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | grep "tModLoader.Linux.*" \
     | cut -d ":" -f2,3 \
     | cut -d '"' -f2 \
+    | grep zip \
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
     unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
