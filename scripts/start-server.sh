@@ -43,8 +43,10 @@ if [ ! -d ${SERVER_DIR}/Worlds ]; then
 	echo "---No World found, downloading---"
 	mkdir ${SERVER_DIR}/Worlds
 	cd ${SERVER_DIR}/Worlds
-	wget -qi ${SERVER_DIR}/Worlds/world.zip "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/world.zip"
+	wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/Worlds/world.zip https://raw.githubusercontent.com/ich777/docker-terraria-server/master/world.zip
+    sleep 1
 	unzip ${SERVER_DIR}/Worlds/world.zip
+    sleep 1
 	rm ${SERVER_DIR}/Worlds/world.zip
 fi
 echo "---Server ready---"
