@@ -49,6 +49,11 @@ if [ ! -d ${SERVER_DIR}/Worlds ]; then
     sleep 1
 	rm ${SERVER_DIR}/Worlds/world.zip
 fi
+if [ -d ${SERVER_DIR}/deploy ]; then
+    cd ${SERVER_DIR}/deploy
+    mv ${SERVER_DIR}/deploy/* ${SERVER_DIR}
+    rm -R ${SERVER_DIR}/deploy
+fi
 echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
