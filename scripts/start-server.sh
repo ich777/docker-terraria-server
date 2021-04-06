@@ -104,5 +104,5 @@ sleep 2
 if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
     /opt/scripts/start-gotty.sh 2>/dev/null &
 fi
-screen -S watchdog -d -m /opt/scripts/start-watchdog.sh
+#screen -S watchdog -d -m /opt/scripts/start-watchdog.sh
 tail -f ${SERVER_DIR}/masterLog.0
