@@ -34,6 +34,10 @@ else
 fi
 
 echo "---Prepare Server---"
+if [ ! -f ~/.screenrc ]; then
+    echo "defscrollback 30000
+bindkey \"^C\" echo 'Blocked. Please use to command \"exit\" to shutdown the server or close this window to exit the terminal.'" > ~/.screenrc
+fi
 if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   echo "---No serverconfig.txt found, downloading...---"
   cd ${SERVER_DIR}
@@ -66,5 +70,8 @@ screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m \
     mono-sgen TerrariaServer.exe \
     ${GAME_PARAMS}
 sleep 2
+if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
+    /opt/scripts/start-gotty.sh 2>/dev/null &
+fi
 screen -S watchdog -d -m /opt/scripts/start-watchdog.sh
 tail -f ${SERVER_DIR}/masterLog.0
