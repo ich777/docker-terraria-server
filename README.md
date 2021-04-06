@@ -20,7 +20,7 @@ WEB CONSOLE: You can connect to the Terraria console by opening your browser and
 # Run example
 
 docker run --name Terraria -d \
-    -p 7777:7777/udp -p 8080:9012 \
+    -p 7777:7777/udp -p 9012:8080 \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
     --env 'UID=99' \
     --env 'GID=100' \
