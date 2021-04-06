@@ -22,7 +22,7 @@ WEB CONSOLE: You can connect to the Terraria console by opening your browser and
 
 ```
 docker run --name Terraria-TShock -d \
-    -p 7777:7777/udp -p 8080:9013 \
+    -p 7777:7777/udp -p 9013:8080 \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
     --env 'GAME_VERSION=1.3.5.3' \
     --env 'UID=99' \
