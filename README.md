@@ -6,7 +6,7 @@ This Docker will download and install Terraria and run it.
 
 Update Notice: The Container will check on every start/restart if there is a newer version of the game available and install it if so.
 
-CONSOLE: To connect to the console open up the terminal on the host machine and type in: 'docker exec -u terraria -ti [Name of your Container] screen -xS Terraria' (without quotes) to exit the screen session press CTRL+A and then CTRL+D or simply close the terminal window in the first place.
+WEB CONSOLE: You can connect to the Minecraft console by opening your browser and go to HOSTIP:9012 (eg: 192.168.1.1:9012) or click on WebUI on the Docker page within Unraid.
 
 ## Env params
 
@@ -20,7 +20,7 @@ CONSOLE: To connect to the console open up the terminal on the host machine and 
 # Run example
 
 docker run --name Terraria -d \
-    -p 7777:7777/udp \
+    -p 7777:7777/udp -p 8080:9012 \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
     --env 'UID=99' \
     --env 'GID=100' \
