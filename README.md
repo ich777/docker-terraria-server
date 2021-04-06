@@ -6,7 +6,7 @@ This Docker will download and install Terraria and run it.
 
 Update Notice: The Container will check on every start/restart if there is a newer version of the game available and install it if so.
 
-WEB CONSOLE: You can connect to the Minecraft console by opening your browser and go to HOSTIP:9012 (eg: 192.168.1.1:9012) or click on WebUI on the Docker page within Unraid.
+WEB CONSOLE: You can connect to the Terraria console by opening your browser and go to HOSTIP:9012 (eg: 192.168.1.1:9012) or click on WebUI on the Docker page within Unraid.
 
 ## Env params
 
