@@ -6,7 +6,7 @@ This Docker will download and install Terraria and the TShock MOD and run it.
 
 Update Notice: Change the game version to whatever version do you want and restart the docker.
 
-WEB CONSOLE: You can connect to the Minecraft console by opening your browser and go to HOSTIP:9014 (eg: 192.168.1.1:9014) or click on WebUI on the Docker page within Unraid.
+WEB CONSOLE: You can connect to the Terraria console by opening your browser and go to HOSTIP:9014 (eg: 192.168.1.1:9014) or click on WebUI on the Docker page within Unraid.
 
 ## Env params
 
