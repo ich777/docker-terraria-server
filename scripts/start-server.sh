@@ -6,7 +6,7 @@ CUR_V="${CUR_V//./}"
 #DL_TOP=?${DL_LINK##*\?}
 #LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
 #DL_LINK=${DL_LINK%terraria*}
-LAT_V="${TARRARIA_SRV_V}"
+LAT_V="${TARRARIA_SRV_V//./}"
 
 echo "---Version Check---"
 if [ ! -d "${SERVER_DIR}/lib" ]; then
