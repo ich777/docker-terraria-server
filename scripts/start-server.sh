@@ -8,6 +8,8 @@ CUR_V="${CUR_V//./}"
 #DL_LINK=${DL_LINK%terraria*}
 LAT_V="${TARRARIA_SRV_V//./}"
 
+rm -rf ${SERVER_DIR}/terraria-server-*.zip
+
 echo "---Version Check---"
 if [ ! -d "${SERVER_DIR}/lib" ]; then
    	echo "---Terraria not found, downloading!---"
