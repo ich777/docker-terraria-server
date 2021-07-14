@@ -15,6 +15,7 @@ ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
 ENV GAME_MOD="template"
 ENV GAME_PARAMS="template"
+ENV TARRARIA_SRV_V="1.4.2.3"
 ENV ENABLE_WEBCONSOLE="true"
 ENV GOTTY_PARAMS="-w --title-format Terraria"
 ENV UMASK=000
