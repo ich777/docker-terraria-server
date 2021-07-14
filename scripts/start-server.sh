@@ -40,7 +40,8 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" == "$CUR_V" ]; then
-    echo "---Terraria Version up-to-date---"
+    echo "---Terraria Server v$LAT_V up-to-date---"
+	echo "---If you want to change the version add a Variable with the Key: 'TERRARIA_SRV_V' and the Value eg: '1.4.2.3'."
 else
  	echo "---Something went wrong, putting server in sleep mode---"
  	sleep infinity
