@@ -1,21 +1,24 @@
 #!/bin/bash
 CUR_V="$(grep "Version" /serverdata/serverfiles/changelog.txt 2>/dev/null | head -1 | cut -d ' ' -f 2)"
 CUR_V="${CUR_V//./}"
-DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
-DL_TOP=?${DL_LINK##*\?}
-LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
-DL_LINK=${DL_LINK%terraria*}
+# Deprecated since Terraria changed how to get the download URL again
+#DL_LINK=https://terraria.org$(curl -sL https://terraria.org/ | grep -Eo $'[^\'"]+terraria-server-[^\'"]+')
+#DL_TOP=?${DL_LINK##*\?}
+#LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
+#DL_LINK=${DL_LINK%terraria*}
+LAT_V="${TARRARIA_SRV_V}"
 
 echo "---Version Check---"
 if [ ! -d "${SERVER_DIR}/lib" ]; then
    	echo "---Terraria not found, downloading!---"
    	cd ${SERVER_DIR}
-   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
+   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "https://terraria.org/api/download/pc-dedicated-server/terraria-server-${LAT_V}.zip" ; then
 		echo "---Successfully downloaded Terraria---"
 	else
 		echo "------------------------------------------------------------------------------"
 		echo "------------Can't download Terraria, putting server into sleep mode-----------"
 		echo "------------------------------------------------------------------------------"
+		sleep infinity
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
@@ -23,12 +26,13 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 elif [ "$LAT_V" != "$CUR_V" ]; then
     echo "---Newer version found, installing!---"
     cd ${SERVER_DIR}
-    if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "$DL_LINK"terraria-server-$LAT_V.zip"$DL_TOP" ; then
+   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O terraria-server-$LAT_V.zip "https://terraria.org/api/download/pc-dedicated-server/terraria-server-${LAT_V}.zip" ; then
 		echo "---Successfully downloaded Terraria---"
 	else
 		echo "------------------------------------------------------------------------------"
 		echo "------------Can't download Terraria, putting server into sleep mode-----------"
 		echo "------------------------------------------------------------------------------"
+		sleep infinity
 	fi
     unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
