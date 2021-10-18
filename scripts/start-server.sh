@@ -54,7 +54,7 @@ echo "---Version Check of tModloader---"
 if [ -z "$CUR_MOD_V" ]; then
     echo "---tModloader not found! Downloading...---"
     cd ${SERVER_DIR}
-    curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest \
+    curl -s "https://api.github.com/repos/tModLoader/tModLoader/releases/latest" \
     | grep "browser_download_url." \
     | grep "tModLoader.Linux.*" \
     | cut -d ":" -f2,3 \
@@ -68,7 +68,7 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
     rm ${SERVER_DIR}/tmodloader_$CUR_MOD_V
     cd ${SERVER_DIR}
-    curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest \
+    curl -s "https://api.github.com/repos/tModLoader/tModLoader/releases/latest" \
     | grep "browser_download_url." \
     | grep "tModLoader.Linux.*" \
     | cut -d ":" -f2,3 \
@@ -82,6 +82,42 @@ elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---tModloader Version up-to-date---"
 else
     echo "---Something went wrong, putting server in sleep mode---"
+    sleep infinity
+fi
+
+CUR_MOD64_V="$(find ${SERVER_DIR} -name tmodloader64_* | cut -d '_' -f2)"
+LAT_MOD64_V="$(curl -s https://api.github.com/repos/Dradonhunter11/tModLoader64bit/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d '"' -f2)"
+
+echo "---Version Check of tModLoader64---"
+if [ -z "$CUR_MOD64_V" ]; then
+    echo "---tModLoader64 not found! Downloading...---"
+    cd ${SERVER_DIR}
+    curl -s "https://api.github.com/repos/Dradonhunter11/tModLoader64bit/releases/latest" \
+    | grep "browser_download_url." \
+    | grep "tModLoader64Bit-Linux-Server" \
+    | cut -d ":" -f2,3 \
+    | cut -d '"' -f2 \
+    | grep zip \
+    | wget -nc --show-progress --progress=bar:force:noscroll -qi -
+    unzip -o "${SERVER_DIR}/tModLoader64Bit-Linux-Server.zip"
+    rm "${SERVER_DIR}/tModLoader64Bit-Linux-Server.zip"
+    touch ${SERVER_DIR}/tmodloader64_$LAT_MOD64_V
+elif [ "$LAT_MOD64_V" != "$CUR_MOD64_V" ]; then
+    echo "---Newer version of tModLoader64 found. Installing...---"
+    rm ${SERVER_DIR}/tmodloader64_$CUR_MOD64_V
+    cd ${SERVER_DIR}
+    curl -s "https://api.github.com/repos/Dradonhunter11/tModLoader64bit/releases/latest" \
+    | grep "browser_download_url." \
+    | grep "tModLoader64Bit-Linux-Server" \
+    | cut -d ":" -f2,3 \
+    | cut -d '"' -f2 \
+    | grep zip \
+    | wget -nc --show-progress --progress=bar:force:noscroll -qi -
+    unzip -o "${SERVER_DIR}/tModLoader64bit-Linux-Server.zip"
+    rm "${SERVER_DIR}/tModLoader64bit-Linux-Server.zip"
+    touch ${SERVER_DIR}/tmodloader64_$LAT_MOD64_V
+else
+    echo "---Something went wrong, putting server to sleep mode---"
     sleep infinity
 fi
 
@@ -106,7 +142,7 @@ screen -wipe 2&>/dev/null
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer -tmlsavedirectory ${SERVER_DIR}/TML ${GAME_PARAMS}
+screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoader64BitServer -tmlsavedirectory ${SERVER_DIR}/TML ${GAME_PARAMS}
 sleep 2
 if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
     /opt/scripts/start-gotty.sh 2>/dev/null &

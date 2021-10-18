@@ -1,6 +1,6 @@
-# Terraria-TShock Dedicated Server in Docker optimized for Unraid
+# Terraria-tModLoader64 Dedicated Server in Docker optimized for Unraid
 
-This Docker will download and install Terraria and the TShock MOD and run it. 
+This Docker will download and install Terraria and tModLoader64 and run it. 
 
 ***SERVER PASSWORD: Docker***
 
@@ -21,15 +21,15 @@ WEB CONSOLE: You can connect to the Terraria console by opening your browser and
 # Run example
 
 ```
-docker run --name Terraria-TShock -d \
+docker run --name Terraria-tModLoader64 -d \
     -p 7777:7777/udp -p 9013:8080 \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
     --env 'GAME_VERSION=1.3.5.3' \
     --env 'UID=99' \
     --env 'GID=100' \
-    --volume /mnt/user/appdata/terraria-tshock:/serverdata/serverfiles \
+    --volume /mnt/user/appdata/terraria-tmodloader64:/serverdata/serverfiles \
     --restart=unless-stopped \
-    ich777/terrariaserver:tshock
+    ich777/terrariaserver:tmodloader64
 ```
 
 This Docker was mainly created for the use with Unraid, if you don’t use Unraid you should definitely try it!

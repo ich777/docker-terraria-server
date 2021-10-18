@@ -18,9 +18,9 @@ ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
 ENV GAME_MOD="template"
 ENV GAME_PARAMS="template"
- ENV TARRARIA_SRV_V="1.4.2.3" 
+ENV TARRARIA_SRV_V="1.4.2.3"
 ENV ENABLE_WEBCONSOLE="true"
-ENV GOTTY_PARAMS="-w --title-format Terraria-tModloader"
+ENV GOTTY_PARAMS="-w --title-format Terraria-tModloader64"
 ENV UMASK=000
 ENV UID=99
 ENV GID=100
@@ -32,6 +32,10 @@ RUN mkdir $DATA_DIR && \
 	useradd -d $DATA_DIR -s /bin/bash $USER && \
 	chown -R $USER $DATA_DIR && \
 	ulimit -n 2048
+
+# TML64 requires mono, even though it's very bloated. The 64-bit fork of TML uses the .Net framework, so it's unavoidable for now.
+RUN apt-get update && \
+		apt-get -y install mono-devel
 
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 777 /opt/scripts/
