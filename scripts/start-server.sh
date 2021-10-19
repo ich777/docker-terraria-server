@@ -116,6 +116,8 @@ elif [ "$LAT_MOD64_V" != "$CUR_MOD64_V" ]; then
     unzip -o "${SERVER_DIR}/tModLoader64bit-Linux-Server.zip"
     rm "${SERVER_DIR}/tModLoader64bit-Linux-Server.zip"
     touch ${SERVER_DIR}/tmodloader64_$LAT_MOD64_V
+elif [ "$LAT_MOD64_V" == "$CUR_MOD64_V" ]; then
+    echo "---tModLoader64 Version up-to-date---"
 else
     echo "---Something went wrong, putting server to sleep mode---"
     sleep infinity
