@@ -85,7 +85,7 @@ else
     sleep infinity
 fi
 
-if [ "${ENABLE_TML64}" = "true" ]; then
+if [ "${ENABLE_TML64}" == "true" ]; then
     CUR_MOD64_V="$(find ${SERVER_DIR} -name tmodloader64_* | cut -d '_' -f2)"
     LAT_MOD64_V="$(curl -s https://api.github.com/repos/Dradonhunter11/tModLoader64bit/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d '"' -f2)"
 
@@ -143,7 +143,7 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
     cd ${SERVER_DIR}
     wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
 fi
-if [ "${ENABLE_TML64}" = "true" ]; then
+if [ "${ENABLE_TML64}" == "true" ]; then
     if [ ! -f "${SERVER_DIR}/tModLoader64BitServer" ]; then
         echo "---Applying MonoKickstart script to TML64---"
         cp ${SERVER_DIR}/tModLoaderServer ${SERVER_DIR}/tModLoader64BitServer
@@ -165,7 +165,7 @@ screen -wipe 2 &>/dev/null
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-if [ "${ENABLE_TML64}" = "true" ]; then
+if [ "${ENABLE_TML64}" == "true" ]; then
     screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoader64BitServer -modpath ${SERVER_DIR}/mods -tmlsavedirectory ${SERVER_DIR}/tml ${GAME_PARAMS}
 else
     screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer -modpath ${SERVER_DIR}/mods -tmlsavedirectory ${SERVER_DIR}/tml ${GAME_PARAMS}
