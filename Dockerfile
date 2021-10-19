@@ -33,7 +33,8 @@ RUN mkdir $DATA_DIR && \
 	chown -R $USER $DATA_DIR && \
 	ulimit -n 2048
 
-# TML64 requires mono, even though it's very bloated. The 64-bit fork of TML uses the .Net framework, so it's unavoidable for now.
+# Thanks to my lack of understand of how tModLoader launches using mono, I can't integrate that with TML64.
+# For now let's just install mono so it at least runs.
 RUN apt-get update && \
 		apt-get -y install mono-devel
 
