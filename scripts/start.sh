@@ -9,8 +9,8 @@ umask ${UMASK}
 echo "---Checking for optional scripts---"
 if [ -f /opt/scripts/user.sh ]; then
 	echo "---Found optional script, executing---"
-    chmod +x /opt/scripts/user.sh
-    /opt/scripts/user.sh
+	chmod +x /opt/scripts/user.sh
+	/opt/scripts/user.sh
 else
 	echo "---No optional script found, continuing---"
 fi
@@ -24,14 +24,13 @@ term_handler() {
 	screenpid="$(su $USER -c "screen -list | grep "Detached" | grep "Terraria" | cut -d '.' -f1")"
 	su $USER -c "screen -S Terraria -X stuff 'exit^M'" >/dev/null
 	tail --pid="${screenpid//[[:blank:]]/}" -f 2>/dev/null
-	exit 143;
+	exit 143
 }
 
 trap 'kill ${!}; term_handler' SIGTERM
 su ${USER} -c "/opt/scripts/start-server.sh" &
 killpid="$!"
-while true
-do
+while true; do
 	wait $killpid
-	exit 0;
+	exit 0
 done
