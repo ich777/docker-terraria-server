@@ -20,6 +20,7 @@ ENV GAME_MOD="template"
 ENV GAME_PARAMS="template"
 ENV TARRARIA_SRV_V="1.4.2.3"
 ENV ENABLE_WEBCONSOLE="true"
+ENV ENABLE_TML64="false"
 ENV GOTTY_PARAMS="-w --title-format Terraria-tModloader64"
 ENV UMASK=000
 ENV UID=99
@@ -32,11 +33,6 @@ RUN mkdir $DATA_DIR && \
 	useradd -d $DATA_DIR -s /bin/bash $USER && \
 	chown -R $USER $DATA_DIR && \
 	ulimit -n 2048
-
-# Thanks to my lack of understand of how tModLoader launches using mono, I can't integrate that with TML64.
-# For now let's just install mono so it at least runs.
-RUN apt-get update && \
-		apt-get -y install mono-devel
 
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 777 /opt/scripts/
