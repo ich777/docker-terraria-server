@@ -1,5 +1,5 @@
 #!/bin/bash
-killpid="$(pidof tModLoaderServer.bin.x86_64)"
+killpid="$(pidof mono)"
 while true
 do
 	tail --pid=$killpid -f /dev/null
