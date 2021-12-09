@@ -1,4 +1,4 @@
-FROM ich777/debian-baseimage:latest_arm64
+FROM ich777/mono-baseimage:latest_arm64
 
 LABEL maintainer="admin@minenet.at"
 
@@ -8,13 +8,6 @@ RUN export TZ=Europe/Rome && \
 	echo $TZ > /etc/timezone && \
 	apt-get -y install --no-install-recommends screen unzip curl && \
 	rm -rf /var/lib/apt/lists/*
-
-RUN apt update && \
-    apt install -y apt-transport-https dirmngr gnupg ca-certificates && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF && \
-	echo "deb https://download.mono-project.com/repo/debian stable-buster main" | tee /etc/apt/sources.list.d/mono-official-stable.list && \
-	apt update && \
-	apt install -y mono-devel
 
 RUN wget -O /tmp/gotty.tar.gz https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_arm.tar.gz && \
 	tar -C /usr/bin/ -xvf /tmp/gotty.tar.gz && \
