@@ -1,4 +1,4 @@
-# Terraria-tModLoader Dedicated Server in Docker
+# Terraria-tModLoader for ARM64 Dedicated Server in Docker
 
 This Docker will download and install Terraria and the TShock MOD and run it. 
 
@@ -32,4 +32,4 @@ docker run --name Terraria-tModLoader -d \
     ich777/terrariaserver:tmodloader_arm64
 ```
 
-### Thank you to [hol430](https://github.com/hol430) for modifying the template for arm64.
+### Thank you to [hol430](https://github.com/hol430) for modifying the template for ARM64
