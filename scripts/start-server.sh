@@ -6,7 +6,7 @@ CUR_V="${CUR_V//./}"
 #DL_TOP=?${DL_LINK##*\?}
 #LAT_V="$(echo ${DL_LINK##*-} | cut -d '.' -f 1)"
 #DL_LINK=${DL_LINK%terraria*}
-LAT_V="${TERRARIA_SRV_V//./}"
+LAT_V="${TARRARIA_SRV_V//./}"
 
 rm -rf ${SERVER_DIR}/terraria-server-*.zip
 
@@ -98,6 +98,14 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   cd ${SERVER_DIR}
   wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
 fi
+
+# Hack to force usage of system mono
+cd "${SERVER_DIR}"
+rm System*
+rm Mono*
+rm monoconfig
+rm mscorlib.dll
+
 echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
@@ -106,7 +114,7 @@ screen -wipe 2&>/dev/null
 
 echo "---Start Server---"
 cd ${SERVER_DIR}
-screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m ${SERVER_DIR}/tModLoaderServer -tmlsavedirectory ${SERVER_DIR}/TML ${GAME_PARAMS}
+screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m mono ${SERVER_DIR}/tModLoaderServer.exe -tmlsavedirectory ${SERVER_DIR}/TML ${GAME_PARAMS}
 sleep 2
 if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
     /opt/scripts/start-gotty.sh 2>/dev/null &
