@@ -1,4 +1,4 @@
-FROM ich777/debian-baseimage
+FROM ich777/mono-baseimage:latest_arm64
 
 LABEL maintainer="admin@minenet.at"
 
@@ -9,7 +9,7 @@ RUN export TZ=Europe/Rome && \
 	apt-get -y install --no-install-recommends screen unzip curl && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN wget -O /tmp/gotty.tar.gz https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && \
+RUN wget -O /tmp/gotty.tar.gz https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_arm.tar.gz && \
 	tar -C /usr/bin/ -xvf /tmp/gotty.tar.gz && \
 	rm -rf /tmp/gotty.tar.gz
 
@@ -18,7 +18,7 @@ ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
 ENV GAME_MOD="template"
 ENV GAME_PARAMS="template"
-ENV TERRARIA_SRV_V="1.4.3.1" 
+ENV TARRARIA_SRV_V="1.4.2.3"
 ENV ENABLE_WEBCONSOLE="true"
 ENV GOTTY_PARAMS="-w --title-format Terraria-tModloader"
 ENV UMASK=000
