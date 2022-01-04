@@ -22,7 +22,7 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 		echo "------------------------------------------------------------------------------"
 		sleep infinity
 	fi
-    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    unzip -o -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" != "$CUR_V" ]; then
@@ -36,7 +36,7 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
 		echo "------------------------------------------------------------------------------"
 		sleep infinity
 	fi
-    unzip -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    unzip -o -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" == "$CUR_V" ]; then
