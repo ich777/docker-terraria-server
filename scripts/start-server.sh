@@ -22,7 +22,7 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 		echo "------------------------------------------------------------------------------"
 		sleep infinity
 	fi
-    unzip -o -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    unzip -qo ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" != "$CUR_V" ]; then
@@ -36,7 +36,7 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
 		echo "------------------------------------------------------------------------------"
 		sleep infinity
 	fi
-    unzip -o -q ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    unzip -qo ${SERVER_DIR}/terraria-server-$LAT_V.zip
     cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
     rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
 elif [ "$LAT_V" == "$CUR_V" ]; then
@@ -61,7 +61,7 @@ if [ -z "$CUR_MOD_V" ]; then
     | cut -d '"' -f2 \
     | grep zip \
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
-    unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
+    unzip -qo ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     touch ${SERVER_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
@@ -75,7 +75,7 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | cut -d '"' -f2 \
     | grep zip \
     | wget -nc --show-progress --progress=bar:force:noscroll -qi -
-    unzip -o ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
+    unzip -qo ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     touch ${SERVER_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
