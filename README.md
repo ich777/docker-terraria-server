@@ -1,4 +1,5 @@
-# Terraria-TShock Dedicated Server in Docker optimized for Unraid
+# DEPRECATED
+# Terraria-tModLoader Dedicated Server in Docker optimized for Unraid
 
 This Docker will download and install Terraria and the TShock MOD and run it. 
 
