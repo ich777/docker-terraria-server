@@ -48,7 +48,7 @@ else
 fi
 
 CUR_MOD_V="$(find ${SERVER_DIR} -name tmodloader_* | cut -d '_' -f2)"
-LAT_MOD_V="$(curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
+LAT_MOD_V="$(wget -qO- https://api.github.com/repos/tModLoader/tModLoader/releases/latest | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2)"
 
 echo "---Version Check of tModloader---"
 if [ -z "$CUR_MOD_V" ]; then
