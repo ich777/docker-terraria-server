@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "---This container is DEPRECATED---"
+sleep infinity
 CUR_V="$(grep "Version" /serverdata/serverfiles/changelog.txt 2>/dev/null | head -1 | cut -d ' ' -f 2)"
 CUR_V="${CUR_V//./}"
 # Deprecated since Terraria changed how to get the download URL again
