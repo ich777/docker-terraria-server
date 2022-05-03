@@ -52,29 +52,29 @@ LAT_MOD_V="$(curl -s https://api.github.com/repos/tModLoader/tModLoader/releases
 
 echo "---Version Check of tModloader---"
 if [ -z "$CUR_MOD_V" ]; then
+    DL_URL="$(wget -qO- https://api.github.com/repos/tModLoader/tModLoader/releases/tags/v${LAT_MOD_V} | jq -r '.assets' | grep "browser_download_url" | grep -v "Example" | cut -d '"' -f4)"
     echo "---tModloader not found! Downloading...---"
     cd ${SERVER_DIR}
-    curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest \
-    | grep "browser_download_url." \
-    | grep "tModLoader.Linux.*" \
-    | cut -d ":" -f2,3 \
-    | cut -d '"' -f2 \
-    | grep zip \
-    | wget -nc --show-progress --progress=bar:force:noscroll -qi -
+    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip "$DL_URL" ; then
+        echo "---Successfully downloaded tModLoader v$LAT_MOD_V---"
+    else
+        echo "---Something went wrong, can't download tModLoader v$LAT_MOD_V, putting container into sleep mode!---"
+        sleep infinity
+    fi
     unzip -qo ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     touch ${SERVER_DIR}/tmodloader_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
+    DL_URL="$(wget -qO- https://api.github.com/repos/tModLoader/tModLoader/releases/tags/v${LAT_MOD_V} | jq -r '.assets' | grep "browser_download_url" | grep -v "Example" | cut -d '"' -f4)"
     echo "---Newer version found, installing!---"
     rm ${SERVER_DIR}/tmodloader_$CUR_MOD_V
     cd ${SERVER_DIR}
-    curl -s https://api.github.com/repos/tModLoader/tModLoader/releases/latest \
-    | grep "browser_download_url." \
-    | grep "tModLoader.Linux.*" \
-    | cut -d ":" -f2,3 \
-    | cut -d '"' -f2 \
-    | grep zip \
-    | wget -nc --show-progress --progress=bar:force:noscroll -qi -
+    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip "$DL_URL" ; then
+        echo "---Successfully downloaded tModLoader v$LAT_MOD_V---"
+    else
+        echo "---Something went wrong, can't download tModLoader v$LAT_MOD_V, putting container into sleep mode!---"
+        sleep infinity
+    fi
     unzip -qo ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     rm ${SERVER_DIR}/tModLoader.Linux.v$LAT_MOD_V.zip
     touch ${SERVER_DIR}/tmodloader_$LAT_MOD_V
