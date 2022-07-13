@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  terraria:
+    container_name: TerrariaServer
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - GAME_PARAMS=-config serverconfig.txt
+      - TERRARIA_SRV_V=1.4.3.2
+    volumes:
+      - server:/serverdata
+    ports:
+      - "7777:7777"
+      - "9013:8080"
+
+volumes:
+  server:

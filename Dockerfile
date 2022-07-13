@@ -14,8 +14,8 @@ ENV DATA_DIR="/serverdata"
 ENV SERVER_DIR="${DATA_DIR}/serverfiles"
 ENV GAME_VERSION="template"
 ENV GAME_MOD="template"
-ENV GAME_PARAMS="template"
-ENV TERRARIA_SRV_V="1.4.3.2"
+ENV GAME_PARAMS="-config serverconfig.txt"
+ENV TERRARIA_MOBILE_SRV_V="1.4.3.2"
 ENV ENABLE_WEBCONSOLE="true"
 ENV GOTTY_PARAMS="-w --title-format Terraria"
 ENV UMASK=000
@@ -31,6 +31,7 @@ RUN mkdir $DATA_DIR && \
 	ulimit -n 2048
 
 ADD /scripts/ /opt/scripts/
+ADD /config/ /config/
 RUN chmod -R 777 /opt/scripts/
 
 #Server Start
