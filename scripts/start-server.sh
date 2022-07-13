@@ -10,36 +10,36 @@ rm -rf ${SERVER_DIR}/Terraria-Mobile-Server-*.zip
 
 echo "---Version Check---"
 if [ ! -d "${SERVER_DIR}/lib" ]; then
-   	echo "---Terraria not found, downloading!---"
+	echo "---Terraria Mobile not found, downloading!---"
    	cd ${SERVER_DIR}
-   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O Terraria-Mobile-Server-$TERRARIA_SRV_V.zip "https://www.terraria.org/api/download/mobile-dedicated-server/Terraria-Mobile-Server-${TERRARIA_SRV_V}.zip" ; then
+   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V.zip "https://www.terraria.org/api/download/mobile-dedicated-server/Terraria-Mobile-Server-${TERRARIA_MOBILE_SRV_V}.zip" ; then
 		echo "---Successfully downloaded Terraria---"
 	else
 		echo "------------------------------------------------------------------------------"
-		echo "------------Can't download Terraria, putting server into sleep mode-----------"
+		echo "--------Can't download Terraria Mobile, putting server into sleep mode--------"
 		echo "------------------------------------------------------------------------------"
 		sleep infinity
 	fi
-    unzip -qo ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_SRV_V.zip
-    cp -R -f ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_SRV_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_SRV_V.zip
-elif [ "$TERRARIA_SRV_V" != "$CUR_V" ]; then
+    unzip -qo ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V.zip
+    cp -R -f ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V/Linux/* ${SERVER_DIR}/
+    rm -R ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V.zip ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V
+elif [ "$TERRARIA_MOBILE_SRV_V" != "$CUR_V" ]; then
     echo "---Newer version found, installing!---"
-    cd ${SERVER_DIR}
-   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O Terraria-Mobile-Server-$TERRARIA_SRV_V.zip "https://www.terraria.org/api/download/mobile-dedicated-server/Terraria-Mobile-Server-${TERRARIA_SRV_V}.zip" ; then
+   	cd ${SERVER_DIR}
+   	if wget -q -nc --show-progress --progress=bar:force:noscroll -O Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V.zip "https://www.terraria.org/api/download/mobile-dedicated-server/Terraria-Mobile-Server-${TERRARIA_MOBILE_SRV_V}.zip" ; then
 		echo "---Successfully downloaded Terraria---"
 	else
 		echo "------------------------------------------------------------------------------"
-		echo "------------Can't download Terraria, putting server into sleep mode-----------"
+		echo "--------Can't download Terraria Mobile, putting server into sleep mode--------"
 		echo "------------------------------------------------------------------------------"
 		sleep infinity
 	fi
-    unzip -qo ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_SRV_V.zip
-    cp -R -f ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_SRV_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_SRV_V.zip
-elif [ "$TERRARIA_SRV_V" == "$CUR_V" ]; then
-    echo "---Terraria Server v$TERRARIA_SRV_V up-to-date---"
-	echo "---If you want to change the version add a Variable with the Key: 'TERRARIA_SRV_V' and the Value eg: '1.4.2.3'."
+    unzip -qo ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V.zip
+    cp -R -f ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V/Linux/* ${SERVER_DIR}/
+    rm -R ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V.zip ${SERVER_DIR}/Terraria-Mobile-Server-$TERRARIA_MOBILE_SRV_V
+elif [ "$TERRARIA_MOBILE_SRV_V" == "$CUR_V" ]; then
+    echo "---Terraria Server v$TERRARIA_MOBILE_SRV_V up-to-date---"
+	echo "---If you want to change the version add a Variable with the Key: 'TERRARIA_MOBILE_SRV_V' and the Value eg: '1.4.2.3'."
 else
  	echo "---Something went wrong, putting server in sleep mode---"
  	sleep infinity
@@ -54,14 +54,6 @@ if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
   echo "---No serverconfig.txt found, copying...---"
   cp -f /config/serverconfig.txt ${SERVER_DIR}
 fi
-#if [ ! -d ${SERVER_DIR}/Worlds ]; then
-#	echo "---No World found, downloading---"
-#	mkdir ${SERVER_DIR}/Worlds
-#	cd ${SERVER_DIR}/Worlds
-#	wget -qi -O ${SERVER_DIR}/Worlds/world.zip "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/world.zip"
-#	unzip ${SERVER_DIR}/Worlds/world.zip
-#	rm ${SERVER_DIR}/Worlds/world.zip
-#fi
 echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
 echo "---Checking for old logs---"
