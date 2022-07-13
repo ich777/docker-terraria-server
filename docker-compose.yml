@@ -13,7 +13,7 @@ services:
       - server:/serverdata
     ports:
       - "7777:7777"
-      - "9012:8080"
+      - "9013:8080"
 
 volumes:
   server:
