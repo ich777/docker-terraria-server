@@ -17,6 +17,7 @@ WEB CONSOLE: You can connect to the Terraria Mobile Server console by opening yo
 
 # Run example
 
+```bash
 docker run --name TerrariaMobile -d \
     -p 7777:7777/udp -p 9012:8080 \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
@@ -25,6 +26,7 @@ docker run --name TerrariaMobile -d \
     --volume /mnt/user/appdata/terraria-mobile:/serverdata/serverfiles \
     --restart=unless-stopped \
     ich777/terrariaserver:mobile
+```
 
 This Docker was mainly created for the use with Unraid, if you don’t use Unraid you should definitely try it!
 
