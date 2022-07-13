@@ -4,7 +4,7 @@ This Docker will download and install the Terraria Mobile Server and run it.
 
 Update Notice: The Container will check on every start/restart if there is a newer version of the game available and install it if so.
 
-WEB CONSOLE: You can connect to the Terraria Mobile Server console by opening your browser and go to HOSTIP:9012 (eg: 192.168.1.1:9012) or click on WebUI on the Docker page within Unraid.
+WEB CONSOLE: You can connect to the Terraria Mobile Server console by opening your browser and go to HOSTIP:9013 (eg: 192.168.1.1:9013) or click on WebUI on the Docker page within Unraid.
 
 ## Env params
 
@@ -19,11 +19,11 @@ WEB CONSOLE: You can connect to the Terraria Mobile Server console by opening yo
 
 ```bash
 docker run --name TerrariaMobile -d \
-    -p 7777:7777/udp -p 9012:8080 \
+    -p 7777:7777/udp -p 9013:8080 \
     --env 'GAME_PARAMS=-config serverconfig.txt' \
     --env 'UID=99' \
     --env 'GID=100' \
-    --volume /mnt/user/appdata/terraria-mobile:/serverdata/serverfiles \
+    --volume /path/to/terraria-mobile:/serverdata/serverfiles \
     --restart=unless-stopped \
     ich777/terrariaserver:mobile
 ```
