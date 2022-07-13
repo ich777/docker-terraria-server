@@ -8,12 +8,12 @@ WEB CONSOLE: You can connect to the Terraria Mobile Server console by opening yo
 
 ## Env params
 
-| Name | Value | Example |
-| --- | --- | --- |
-| SERVER_DIR | Folder for gamefiles | /serverdata/serverfiles |
+| Name        | Value                          | Example                  |
+| ----------- | ------------------------------ | ------------------------ |
+| SERVER_DIR  | Folder for gamefiles           | /serverdata/serverfiles  |
 | GAME_PARAMS | Commandline startup parameters | -config serverconfig.txt |
-| UID | User Identifier | 99 |
-| GID | Group Identifier | 100 |
+| UID         | User Identifier                | 99                       |
+| GID         | Group Identifier               | 100                      |
 
 # Run example
 
