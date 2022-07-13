@@ -2,6 +2,8 @@
 
 This Docker will download and install the Terraria Mobile Server and run it.
 
+***SERVER PASSWORD: Docker***
+
 Update Notice: The Container will check on every start/restart if there is a newer version of the game available and install it if so.
 
 WEB CONSOLE: You can connect to the Terraria Mobile Server console by opening your browser and go to HOSTIP:9013 (eg: 192.168.1.1:9013) or click on WebUI on the Docker page within Unraid.
