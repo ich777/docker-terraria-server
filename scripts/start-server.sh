@@ -13,8 +13,10 @@ if [ -z "$CUR_MOD_V" ]; then
     | head -1 \
     | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
     unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
-    cd "$(ls -d TShock*/)"
-    cp -rf * ${SERVER_DIR}/
+    if [ "$(ls -d TShock*/ 2>/dev/null)" ]; then
+        cd "$(ls -d TShock*/)"
+        cp -rf * ${SERVER_DIR}/
+    fi
     rm -rf ../"$(pwd | cut -d '/' -f4)"
     mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
@@ -28,9 +30,11 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     | head -1 \
     | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
     unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
-    cd "$(ls -d TShock*/)"
-    cp -rf * ${SERVER_DIR}/
-    rm -rf ../"$(pwd | cut -d '/' -f4)"
+    if [ "$(ls -d TShock*/ 2>/dev/null)" ]; then
+        cd "$(ls -d TShock*/)"
+        cp -rf * ${SERVER_DIR}/
+        rm -rf ../"$(pwd | cut -d '/' -f4)"
+    fi
     mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---TShock Mod Version up-to-date---"
@@ -45,19 +49,8 @@ if [ ! -f ~/.screenrc ]; then
 bindkey \"^C\" echo 'Blocked. Please use to command \"exit\" to shutdown the server or close this window to exit the terminal.'" > ~/.screenrc
 fi
 if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
-  echo "---No serverconfig.txt found, downloading...---"
-  cd ${SERVER_DIR}
-  wget -qi serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
-fi
-if [ ! -d ${SERVER_DIR}/Worlds ]; then
-	echo "---No World found, downloading---"
-	mkdir ${SERVER_DIR}/Worlds
-	cd ${SERVER_DIR}/Worlds
-	wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/Worlds/world.zip https://raw.githubusercontent.com/ich777/docker-terraria-server/master/world.zip
-    sleep 1
-	unzip ${SERVER_DIR}/Worlds/world.zip
-    sleep 1
-	rm ${SERVER_DIR}/Worlds/world.zip
+  echo "---No serverconfig.txt found, copying...---"
+  cp -f /config/serverconfig.txt ${SERVER_DIR}
 fi
 if [ -d ${SERVER_DIR}/deploy ]; then
     cd ${SERVER_DIR}/deploy
