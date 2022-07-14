@@ -23,8 +23,8 @@ if [ ! -d "${SERVER_DIR}/lib" ]; then
 		sleep infinity
 	fi
     unzip -qo ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}/
+    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip ${SERVER_DIR}/${LAT_V}
 elif [ "$LAT_V" != "$CUR_V" ]; then
     echo "---Newer version found, installing!---"
     cd ${SERVER_DIR}
@@ -37,8 +37,8 @@ elif [ "$LAT_V" != "$CUR_V" ]; then
 		sleep infinity
 	fi
     unzip -qo ${SERVER_DIR}/terraria-server-$LAT_V.zip
-    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}
-    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip
+    cp -R -f ${SERVER_DIR}/$LAT_V/Linux/* ${SERVER_DIR}/
+    rm -R ${SERVER_DIR}/terraria-server-$LAT_V.zip ${SERVER_DIR}/${LAT_V}
 elif [ "$LAT_V" == "$CUR_V" ]; then
     echo "---Terraria Server v$TERRARIA_SRV_V up-to-date---"
 	echo "---If you want to change the version add a Variable with the Key: 'TERRARIA_SRV_V' and the Value eg: '1.4.2.3'."
@@ -53,17 +53,8 @@ if [ ! -f ~/.screenrc ]; then
 bindkey \"^C\" echo 'Blocked. Please use to command \"exit\" to shutdown the server or close this window to exit the terminal.'" > ~/.screenrc
 fi
 if [ ! -f "${SERVER_DIR}/serverconfig.txt" ]; then
-  echo "---No serverconfig.txt found, downloading...---"
-  cd ${SERVER_DIR}
-  wget -qi -O serverconfig.txt "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/config/serverconfig.txt"
-fi
-if [ ! -d ${SERVER_DIR}/Worlds ]; then
-	echo "---No World found, downloading---"
-	mkdir ${SERVER_DIR}/Worlds
-	cd ${SERVER_DIR}/Worlds
-	wget -qi -O ${SERVER_DIR}/Worlds/world.zip "https://raw.githubusercontent.com/ich777/docker-terraria-server/master/world.zip"
-	unzip ${SERVER_DIR}/Worlds/world.zip
-	rm ${SERVER_DIR}/Worlds/world.zip
+  echo "---No serverconfig.txt found, copying...---"
+  cp -f /config/serverconfig.txt ${SERVER_DIR}
 fi
 echo "---Server ready---"
 chmod -R ${DATA_PERM} ${DATA_DIR}
