@@ -1,10 +1,17 @@
-FROM ich777/mono-baseimage
+FROM ich777/debian-baseimage
 
 LABEL org.opencontainers.image.authors="admin@minenet.at"
 LABEL org.opencontainers.image.source="https://github.com/ich777/docker-terraria-server"
 
 RUN apt-get update && \
-	apt-get -y install --no-install-recommends screen unzip curl && \
+	apt-get -y install --no-install-recommends screen unzip && \
+	rm -rf /var/lib/apt/lists/*
+
+RUN wget -O /tmp/packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb && \
+	dpkg -i /tmp/packages-microsoft-prod.deb && \
+	apt-get update && \
+	apt-get -y install aspnetcore-runtime-6.0 && \
+	rm -rf //tmp/packages-microsoft-prod.deb && \
 	rm -rf /var/lib/apt/lists/*
 
 RUN wget -O /tmp/gotty.tar.gz https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && \
