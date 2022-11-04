@@ -19,7 +19,7 @@ if [ -z "$CUR_MOD_V" ]; then
     unzip -qo ${SERVER_DIR}/tshock_$LAT_MOD_V.zip
     tar -C ${SERVER_DIR}/ -xvf TS*-linux-x64-Release.tar
     rm -rf ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/TS*-linux-x64-Release.tar
-    touch ${SERVER_DIR}/tshock_$CUR_MOD_V
+    touch ${SERVER_DIR}/tshock_$LAT_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
     rm ${SERVER_DIR}/tshock_$CUR_MOD_V
@@ -34,7 +34,7 @@ elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     unzip -qo ${SERVER_DIR}/tshock_$LAT_MOD_V.zip
     tar -C ${SERVER_DIR}/ -xvf TS*-linux-x64-Release.tar
     rm -rf ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/TS*-linux-x64-Release.tar
-    touch ${SERVER_DIR}/tshock_$CUR_MOD_V
+    touch ${SERVER_DIR}/tshock_$LAT_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---TShock Mod Version up-to-date---"
 else
