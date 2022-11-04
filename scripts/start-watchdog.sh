@@ -1,5 +1,5 @@
 #!/bin/bash
-killpid="$(pidof mono-sgen)"
+killpid="$(pidof TShock.Server)"
 while true
 do
 	tail --pid=$killpid -f /dev/null
