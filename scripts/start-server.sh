@@ -2,6 +2,7 @@
 CUR_MOD_V="$(find ${SERVER_DIR} -name tshock_* 2>/dev/null | cut -d '_' -f2)" 
 LAT_MOD_V="$(wget -qO- https://api.github.com/repos/Pryaxis/TShock/releases | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2 | sort -V | tail -1)"
 
+rm -rf ${SERVER_DIR}/tshock_*.zip
 rm -rf ${SERVER_DIR}/*-linux-arm-Release.tar
 
 echo "---Version Check of TShock Mod---"
@@ -64,7 +65,7 @@ screen -wipe 2&>/dev/null
 echo "---Start Server---"
 cd ${SERVER_DIR}
 screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m \
-    ./Tshock.Server \
+    ./TShock.Server \
     ${GAME_PARAMS}
 sleep 2
 if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
