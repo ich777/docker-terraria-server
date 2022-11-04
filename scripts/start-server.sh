@@ -1,13 +1,13 @@
 #!/bin/bash
 CUR_MOD_V="$(find ${SERVER_DIR} -name tshock_* 2>/dev/null | cut -d '_' -f2)" 
-LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2 | sort -V | tail -1)"
+LAT_MOD_V="$(wget -qO- https://api.github.com/repos/Pryaxis/TShock/releases | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2 | sort -V | tail -1)"
 
 rm -rf ${SERVER_DIR}/*-linux-arm-Release.tar
 
 echo "---Version Check of TShock Mod---"
 if [ -z "$CUR_MOD_V" ]; then
     echo "---TShock Mod not found! Downloading...---"
-    DL_URL="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep "browser_download_url." | grep "linux-x64-Release.zip" | cut -d '"' -f4)"
+    DL_URL="$(wget -qO- https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep "browser_download_url." | grep "linux-x64-Release.zip" | cut -d '"' -f4)"
     cd ${SERVER_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip "$DL_URL" ; then
         echo "---Successfully downloaded TShock Mod v$LAT_MOD_V---"
@@ -22,7 +22,7 @@ if [ -z "$CUR_MOD_V" ]; then
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
     rm ${SERVER_DIR}/tshock_$CUR_MOD_V
-    DL_URL="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep "browser_download_url." | grep "linux-x64-Release.zip" | cut -d '"' -f4)"
+    DL_URL="$(wget -qO- https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep "browser_download_url." | grep "linux-x64-Release.zip" | cut -d '"' -f4)"
     cd ${SERVER_DIR}
     if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip "$DL_URL" ; then
         echo "---Successfully downloaded TShock Mod v$LAT_MOD_V---"
