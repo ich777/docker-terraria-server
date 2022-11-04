@@ -1,41 +1,39 @@
 #!/bin/bash
 CUR_MOD_V="$(find ${SERVER_DIR} -name tshock_* 2>/dev/null | cut -d '_' -f2)" 
-LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2 | head -1)"
+LAT_MOD_V="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2 | sort -V | tail -1)"
+
+rm -rf ${SERVER_DIR}/*-linux-arm-Release.tar
 
 echo "---Version Check of TShock Mod---"
 if [ -z "$CUR_MOD_V" ]; then
     echo "---TShock Mod not found! Downloading...---"
+    DL_URL="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep "browser_download_url." | grep "linux-x64-Release.zip" | cut -d '"' -f4)"
     cd ${SERVER_DIR}
-    curl -s https://api.github.com/repos/Pryaxis/TShock/releases \
-    | grep "browser_download_url." \
-    | cut -d ":" -f2,3 \
-    | cut -d '"' -f2 \
-    | head -1 \
-    | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
-    unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
-    if [ "$(ls -d TShock*/ 2>/dev/null)" ]; then
-        cd "$(ls -d TShock*/)"
-        cp -rf * ${SERVER_DIR}/
+    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip "$DL_URL" ; then
+        echo "---Successfully downloaded TShock Mod v$LAT_MOD_V---"
+    else
+        echo "---Something went wrong, can't download TShock Mod v$LAT_MOD_V, putting container into sleep mode!---"
+        sleep infinity
     fi
-    rm -rf ../"$(pwd | cut -d '/' -f4)"
-    mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
+    unzip -qo ${SERVER_DIR}/tshock_$LAT_MOD_V.zip
+    tar -C ${SERVER_DIR}/ -xvf TS*-linux-x64-Release.tar
+    rm -rf ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/TS*-linux-x64-Release.tar
+    touch ${SERVER_DIR}/tshock_$CUR_MOD_V
 elif [ "$LAT_MOD_V" != "$CUR_MOD_V" ]; then
     echo "---Newer version found, installing!---"
     rm ${SERVER_DIR}/tshock_$CUR_MOD_V
+    DL_URL="$(curl -s https://api.github.com/repos/Pryaxis/TShock/releases/latest | grep "browser_download_url." | grep "linux-x64-Release.zip" | cut -d '"' -f4)"
     cd ${SERVER_DIR}
-    curl -s https://api.github.com/repos/Pryaxis/TShock/releases \
-    | grep "browser_download_url." \
-    | cut -d ":" -f2,3 \
-    | cut -d '"' -f2 \
-    | head -1 \
-    | wget -q -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip -i -
-    unzip -qo /serverdata/serverfiles/tshock_$LAT_MOD_V.zip
-    if [ "$(ls -d TShock*/ 2>/dev/null)" ]; then
-        cd "$(ls -d TShock*/)"
-        cp -rf * ${SERVER_DIR}/
-        rm -rf ../"$(pwd | cut -d '/' -f4)"
+    if wget -q -nc --show-progress --progress=bar:force:noscroll -O ${SERVER_DIR}/tshock_$LAT_MOD_V.zip "$DL_URL" ; then
+        echo "---Successfully downloaded TShock Mod v$LAT_MOD_V---"
+    else
+        echo "---Something went wrong, can't download TShock Mod v$LAT_MOD_V, putting container into sleep mode!---"
+        sleep infinity
     fi
-    mv ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/tshock_$LAT_MOD_V
+    unzip -qo ${SERVER_DIR}/tshock_$LAT_MOD_V.zip
+    tar -C ${SERVER_DIR}/ -xvf TS*-linux-x64-Release.tar
+    rm -rf ${SERVER_DIR}/tshock_$LAT_MOD_V.zip ${SERVER_DIR}/TS*-linux-x64-Release.tar
+    touch ${SERVER_DIR}/tshock_$CUR_MOD_V
 elif [ "$LAT_MOD_V" == "$CUR_MOD_V" ]; then
     echo "---TShock Mod Version up-to-date---"
 else
@@ -66,7 +64,7 @@ screen -wipe 2&>/dev/null
 echo "---Start Server---"
 cd ${SERVER_DIR}
 screen -S Terraria -L -Logfile ${SERVER_DIR}/masterLog.0 -d -m \
-    mono-sgen TerrariaServer.exe \
+    ./Tshock.Server \
     ${GAME_PARAMS}
 sleep 2
 if [ "${ENABLE_WEBCONSOLE}" == "true" ]; then
