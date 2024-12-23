@@ -2,6 +2,16 @@
 CUR_MOD_V="$(find ${SERVER_DIR} -name tshock_* 2>/dev/null | cut -d '_' -f2)" 
 LAT_MOD_V="$(wget -qO- https://api.github.com/repos/Pryaxis/TShock/releases | grep tag_name | cut -d '"' -f4 | cut -d 'v' -f2 | sort -V | tail -1)"
 
+if [ -z "${LAT_MOD_V}" ]; then
+    if [ -z "${CUR_MOD_V}" ]; then
+        echo "---Can't get latest release and found no installed version, putting container into sleep mode...---"
+        sleep infinity
+    else
+      echo "---Can't get latest version, falling back to current installed version: ${CUR_MOD_V}---"
+      LAT_MOD_V="${CUR_MOD_V}"
+    fi
+fi
+
 rm -rf ${SERVER_DIR}/tshock_*.zip
 rm -rf ${SERVER_DIR}/*-linux-arm-Release.tar
 
