@@ -7,10 +7,10 @@ RUN apt-get update && \
 	apt-get -y install --no-install-recommends screen unzip && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN wget -O /tmp/packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/11/packages-microsoft-prod.deb && \
+RUN wget -O /tmp/packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb && \
 	dpkg -i /tmp/packages-microsoft-prod.deb && \
 	apt-get update && \
-	apt-get -y install aspnetcore-runtime-6.0 && \
+	apt-get -y install aspnetcore-runtime-9.0 && \
 	rm -rf //tmp/packages-microsoft-prod.deb && \
 	rm -rf /var/lib/apt/lists/*
 
